@@ -33,17 +33,14 @@ export default function LandingPage({ setRole, sampleMenu, setSelectedProduct })
         <div className="container" style={{ position: 'relative', zIndex: 2 }}>
           <div className="grid-2" style={{ alignItems: 'center' }}>
             <div className="hero-content">
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1rem' }}>
-                <span style={{ fontSize: '0.9rem', fontWeight: 700, color: 'var(--color-secondary)', letterSpacing: '0.1em' }}>01</span>
-                <span style={{ display: 'inline-block', width: '20px', height: '1px', backgroundColor: 'var(--border-color)' }}></span>
-                <span style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>The Trust Problem</span>
-              </div>
+              <span className="badge badge-primary" style={{ marginBottom: '1rem', padding: '0.4rem 1rem' }}>
+                ⭐ Neighborhood Kitchen Revolution
+              </span>
               <h1 style={{ fontSize: '3.5rem', lineHeight: '1.15', marginBottom: '1.5rem', fontWeight: 800 }}>
-                We solved food delivery. <br />
-                <span style={{ color: 'var(--color-secondary)', fontStyle: 'italic' }}>We never solved food trust.</span>
+                Pakkinti <span style={{ color: 'var(--color-primary)' }}>Pulla Kura</span>
               </h1>
-              <p style={{ fontSize: '1.15rem', color: 'var(--text-muted)', marginBottom: '2rem', maxWidth: '540px', lineHeight: '1.6' }}>
-                Restaurants compete on discounts and speed. Meanwhile the kitchen stays invisible, the cook stays anonymous, and every household reinvents the same meal on its own stove. Chulha rebuilds the model — starting from trust.
+              <p style={{ fontSize: '1.15rem', color: 'var(--text-muted)', marginBottom: '2rem', maxWidth: '540px' }}>
+                Taste the culinary magic of your neighborhood! Connecting 1,000 households with 20 verified home makers cooking fresh, healthy, and authentic curries daily from 10 AM to 1 PM.
               </p>
               
               <form onSubmit={handleSearch} className="glass-panel" style={{
@@ -153,11 +150,12 @@ export default function LandingPage({ setRole, sampleMenu, setSelectedProduct })
                 <span style={{ display: 'inline-block', width: '20px', height: '1px', backgroundColor: 'var(--border-color)' }}></span>
                 <span style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>About Us (Our Story)</span>
               </div>
-              <h2 style={{ fontSize: '2.6rem', lineHeight: '1.2', marginBottom: '1.5rem', fontWeight: 800 }}>
-                Rebuilding home kitchens, <span style={{ color: 'var(--color-primary)' }}>block by block.</span>
+              <h2 style={{ fontSize: '2.5rem', lineHeight: '1.25', marginBottom: '1.5rem', fontWeight: 800 }}>
+                We solved food delivery. <br />
+                <span style={{ color: 'var(--color-secondary)', fontStyle: 'italic' }}>We never solved food trust.</span>
               </h2>
               <p style={{ color: 'var(--text-muted)', fontSize: '1.05rem', lineHeight: '1.75' }}>
-                Chulha was born out of a simple, pressing question: <em>Do you know who cooked your last meal?</em> In an era of industrial dark kitchens and hyper-processed delivery apps, we have sacrificed transparency for speed. 
+                Restaurants compete on discounts and speed. Meanwhile the kitchen stays invisible, the cook stays anonymous, and every household reinvents the same meal on its own stove. Chulha rebuilds the model — starting from trust.
                 <br /><br />
                 Chulha is a local community kitchen initiative designed to bring safety, trust, and connection back to food. We standardize recipe hygiene and raw ingredient sourcing, while keeping the cooking decentralized. By empowering neighborhood home makers, we ensure your family receives fresh, healthy meals cooked by hands you can trust.
               </p>
