@@ -33,14 +33,17 @@ export default function LandingPage({ setRole, sampleMenu, setSelectedProduct })
         <div className="container" style={{ position: 'relative', zIndex: 2 }}>
           <div className="grid-2" style={{ alignItems: 'center' }}>
             <div className="hero-content">
-              <span className="badge badge-primary" style={{ marginBottom: '1rem', padding: '0.4rem 1rem' }}>
-                ⭐ Neighborhood Kitchen Revolution
-              </span>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1rem' }}>
+                <span style={{ fontSize: '0.9rem', fontWeight: 700, color: 'var(--color-secondary)', letterSpacing: '0.1em' }}>01</span>
+                <span style={{ display: 'inline-block', width: '20px', height: '1px', backgroundColor: 'var(--border-color)' }}></span>
+                <span style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>The Trust Problem</span>
+              </div>
               <h1 style={{ fontSize: '3.5rem', lineHeight: '1.15', marginBottom: '1.5rem', fontWeight: 800 }}>
-                Pakkinti <span style={{ color: 'var(--color-primary)' }}>Pulla Kura</span>
+                We solved food delivery. <br />
+                <span style={{ color: 'var(--color-secondary)', fontStyle: 'italic' }}>We never solved food trust.</span>
               </h1>
-              <p style={{ fontSize: '1.15rem', color: 'var(--text-muted)', marginBottom: '2rem', maxWidth: '540px' }}>
-                Taste the culinary magic of your neighborhood! Connecting 1,000 households with 20 verified home makers cooking fresh, healthy, and authentic curries daily from 10 AM to 1 PM.
+              <p style={{ fontSize: '1.15rem', color: 'var(--text-muted)', marginBottom: '2rem', maxWidth: '540px', lineHeight: '1.6' }}>
+                Restaurants compete on discounts and speed. Meanwhile the kitchen stays invisible, the cook stays anonymous, and every household reinvents the same meal on its own stove. Chulha rebuilds the model — starting from trust.
               </p>
               
               <form onSubmit={handleSearch} className="glass-panel" style={{
@@ -136,10 +139,71 @@ export default function LandingPage({ setRole, sampleMenu, setSelectedProduct })
         </div>
       </section>
 
+      {/* About Us Section */}
+      <section className="about-us-section" style={{
+        padding: '5rem 0',
+        backgroundColor: 'var(--bg-card)',
+        borderBottom: '1px solid var(--border-color)'
+      }}>
+        <div className="container">
+          <div className="grid-2" style={{ alignItems: 'flex-start', gap: '3rem' }}>
+            <div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1rem' }}>
+                <span style={{ fontSize: '0.9rem', fontWeight: 700, color: 'var(--color-secondary)', letterSpacing: '0.1em' }}>02</span>
+                <span style={{ display: 'inline-block', width: '20px', height: '1px', backgroundColor: 'var(--border-color)' }}></span>
+                <span style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>About Us (Our Story)</span>
+              </div>
+              <h2 style={{ fontSize: '2.6rem', lineHeight: '1.2', marginBottom: '1.5rem', fontWeight: 800 }}>
+                Rebuilding home kitchens, <span style={{ color: 'var(--color-primary)' }}>block by block.</span>
+              </h2>
+              <p style={{ color: 'var(--text-muted)', fontSize: '1.05rem', lineHeight: '1.75' }}>
+                Chulha was born out of a simple, pressing question: <em>Do you know who cooked your last meal?</em> In an era of industrial dark kitchens and hyper-processed delivery apps, we have sacrificed transparency for speed. 
+                <br /><br />
+                Chulha is a local community kitchen initiative designed to bring safety, trust, and connection back to food. We standardize recipe hygiene and raw ingredient sourcing, while keeping the cooking decentralized. By empowering neighborhood home makers, we ensure your family receives fresh, healthy meals cooked by hands you can trust.
+              </p>
+            </div>
+            
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', marginTop: '2rem' }}>
+              <div style={{ borderLeft: '3px solid var(--color-secondary)', paddingLeft: '1.25rem' }}>
+                <h4 style={{ fontSize: '1.15rem', color: 'var(--text-bright)', marginBottom: '0.25rem', fontWeight: 700 }}>
+                  Radical Transparency
+                </h4>
+                <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>
+                  No hidden dark kitchens. Every meal is traceably cooked by a verified home maker in your immediate neighborhood.
+                </p>
+              </div>
+
+              <div style={{ borderLeft: '3px solid var(--color-primary)', paddingLeft: '1.25rem' }}>
+                <h4 style={{ fontSize: '1.15rem', color: 'var(--text-bright)', marginBottom: '0.25rem', fontWeight: 700 }}>
+                  Strict Safety Verification
+                </h4>
+                <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>
+                  We implement a dual quality check model: a physical 1-spoon taste inspection at 9:30 AM and an AI-driven daily kitchen cleanliness audit.
+                </p>
+              </div>
+
+              <div style={{ borderLeft: '3px solid var(--color-primary)', paddingLeft: '1.25rem' }}>
+                <h4 style={{ fontSize: '1.15rem', color: 'var(--text-bright)', marginBottom: '0.25rem', fontWeight: 700 }}>
+                  Empowering Local Livelihoods
+                </h4>
+                <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>
+                  We return up to 75% of batch sales back to local home makers, fostering micro-entrepreneurship and economic growth in the community.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Core Principles */}
       <section className="principles-section" style={{ padding: '5rem 0 3rem' }}>
         <div className="container">
           <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', justifyContent: 'center', marginBottom: '1rem' }}>
+              <span style={{ fontSize: '0.9rem', fontWeight: 700, color: 'var(--color-secondary)', letterSpacing: '0.1em' }}>03</span>
+              <span style={{ display: 'inline-block', width: '20px', height: '1px', backgroundColor: 'var(--border-color)' }}></span>
+              <span style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>The PPK Blueprint</span>
+            </div>
             <h2 style={{ fontSize: '2.5rem', marginBottom: '1rem', fontWeight: 800 }}>The PPK Blueprint</h2>
             <p style={{ color: 'var(--text-muted)', maxWidth: '600px', margin: '0 auto' }}>
               We build micro-local community hubs standardizing home cooking. Here is how each 1000-house block operates:
@@ -215,6 +279,11 @@ export default function LandingPage({ setRole, sampleMenu, setSelectedProduct })
         <div className="container">
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '3rem' }}>
             <div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1rem' }}>
+                <span style={{ fontSize: '0.9rem', fontWeight: 700, color: 'var(--color-secondary)', letterSpacing: '0.1em' }}>04</span>
+                <span style={{ display: 'inline-block', width: '20px', height: '1px', backgroundColor: 'var(--border-color)' }}></span>
+                <span style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Today's Curries</span>
+              </div>
               <h2 style={{ fontSize: '2.2rem', fontWeight: 800 }}>Explore Today's Curries</h2>
               <p style={{ color: 'var(--text-muted)' }}>Click any card to read recipe standards, nutrition cost-breakdowns, and health matrixes.</p>
             </div>
@@ -283,7 +352,11 @@ export default function LandingPage({ setRole, sampleMenu, setSelectedProduct })
       }}>
         <div className="container">
           <div style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
-            <span className="badge badge-primary" style={{ marginBottom: '1rem' }}>🏆 Local Champions</span>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', justifyContent: 'center', marginBottom: '1rem' }}>
+              <span style={{ fontSize: '0.9rem', fontWeight: 700, color: 'var(--color-secondary)', letterSpacing: '0.1em' }}>05</span>
+              <span style={{ display: 'inline-block', width: '20px', height: '1px', backgroundColor: 'var(--border-color)' }}></span>
+              <span style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Our Neighborhood Chefs</span>
+            </div>
             <h2 style={{ fontSize: '2.5rem', fontWeight: 800 }}>Our Verified Neighborhood Chefs</h2>
             <p style={{ color: 'var(--text-muted)', maxWidth: '600px', margin: '0 auto' }}>
               We handpick home makers and verify their kitchens daily. Meet some of the talented cooks serving your neighborhood block:
