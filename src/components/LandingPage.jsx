@@ -17,6 +17,26 @@ export default function LandingPage({ setRole, sampleMenu, setSelectedProduct })
     }
   };
 
+  React.useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('revealed');
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    const targets = document.querySelectorAll('.scroll-reveal');
+    targets.forEach((target) => observer.observe(target));
+
+    return () => {
+      targets.forEach((target) => observer.unobserve(target));
+    };
+  }, []);
+
   return (
     <div className="landing-container animate-fade-in">
       {/* Hero Section */}
@@ -32,7 +52,7 @@ export default function LandingPage({ setRole, sampleMenu, setSelectedProduct })
       }}>
         <div className="container" style={{ position: 'relative', zIndex: 2 }}>
           <div className="grid-2" style={{ alignItems: 'center' }}>
-            <div className="hero-content">
+            <div className="hero-content scroll-reveal scroll-reveal-left">
               <span className="badge badge-primary" style={{ marginBottom: '1rem', padding: '0.4rem 1rem' }}>
                 ⭐ Neighborhood Kitchen Revolution
               </span>
@@ -95,7 +115,7 @@ export default function LandingPage({ setRole, sampleMenu, setSelectedProduct })
               )}
             </div>
 
-            <div className="hero-image-container" style={{ display: 'flex', justifyContent: 'center' }}>
+            <div className="hero-image-container scroll-reveal scroll-reveal-right" style={{ display: 'flex', justifyContent: 'center' }}>
               <div style={{
                 position: 'relative',
                 width: '100%',
@@ -144,7 +164,7 @@ export default function LandingPage({ setRole, sampleMenu, setSelectedProduct })
       }}>
         <div className="container">
           <div className="grid-2" style={{ alignItems: 'flex-start', gap: '3rem' }}>
-            <div>
+            <div className="scroll-reveal scroll-reveal-left">
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1rem' }}>
                 <span style={{ fontSize: '0.9rem', fontWeight: 700, color: 'var(--color-secondary)', letterSpacing: '0.1em' }}>02</span>
                 <span style={{ display: 'inline-block', width: '20px', height: '1px', backgroundColor: 'var(--border-color)' }}></span>
@@ -161,7 +181,7 @@ export default function LandingPage({ setRole, sampleMenu, setSelectedProduct })
               </p>
             </div>
             
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', marginTop: '2rem' }}>
+            <div className="scroll-reveal scroll-reveal-right" style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', marginTop: '2rem' }}>
               <div style={{ borderLeft: '3px solid var(--color-secondary)', paddingLeft: '1.25rem' }}>
                 <h4 style={{ fontSize: '1.15rem', color: 'var(--text-bright)', marginBottom: '0.25rem', fontWeight: 700 }}>
                   Radical Transparency
@@ -209,7 +229,7 @@ export default function LandingPage({ setRole, sampleMenu, setSelectedProduct })
           </div>
 
           <div className="grid-3">
-            <div className="glass-panel" style={{ padding: '2.5rem 2rem', textAlign: 'center' }}>
+            <div className="glass-panel scroll-reveal scroll-reveal-left" style={{ padding: '2.5rem 2rem', textAlign: 'center' }}>
               <div style={{
                 width: '60px',
                 height: '60px',
@@ -229,7 +249,7 @@ export default function LandingPage({ setRole, sampleMenu, setSelectedProduct })
               </p>
             </div>
 
-            <div className="glass-panel" style={{ padding: '2.5rem 2rem', textAlign: 'center' }}>
+            <div className="glass-panel scroll-reveal scroll-reveal-up" style={{ padding: '2.5rem 2rem', textAlign: 'center' }}>
               <div style={{
                 width: '60px',
                 height: '60px',
@@ -249,7 +269,7 @@ export default function LandingPage({ setRole, sampleMenu, setSelectedProduct })
               </p>
             </div>
 
-            <div className="glass-panel" style={{ padding: '2.5rem 2rem', textAlign: 'center' }}>
+            <div className="glass-panel scroll-reveal scroll-reveal-right" style={{ padding: '2.5rem 2rem', textAlign: 'center' }}>
               <div style={{
                 width: '60px',
                 height: '60px',
@@ -291,10 +311,13 @@ export default function LandingPage({ setRole, sampleMenu, setSelectedProduct })
           </div>
 
           <div className="grid-4">
-            {sampleMenu.slice(0, 4).map((item) => (
+            {sampleMenu.slice(0, 4).map((item, idx) => (
               <div 
                 key={item.id} 
-                className="glass-panel" 
+                className={`glass-panel scroll-reveal ${
+                  idx === 0 ? 'scroll-reveal-left' :
+                  idx === 3 ? 'scroll-reveal-right' : 'scroll-reveal-up'
+                }`}
                 onClick={() => setSelectedProduct(item)}
                 style={{
                   borderRadius: 'var(--radius-md)',
@@ -362,7 +385,7 @@ export default function LandingPage({ setRole, sampleMenu, setSelectedProduct })
           </div>
 
           <div className="grid-3">
-            <div className="glass-panel" style={{ padding: '2rem', display: 'flex', gap: '1rem', backgroundColor: 'var(--bg-card)' }}>
+            <div className="glass-panel scroll-reveal scroll-reveal-left" style={{ padding: '2rem', display: 'flex', gap: '1rem', backgroundColor: 'var(--bg-card)' }}>
               <div style={{ width: '50px', height: '50px', borderRadius: '50%', backgroundColor: 'var(--color-primary)', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold', fontSize: '1.2rem' }}>
                 J
               </div>
@@ -375,7 +398,7 @@ export default function LandingPage({ setRole, sampleMenu, setSelectedProduct })
               </div>
             </div>
 
-            <div className="glass-panel" style={{ padding: '2rem', display: 'flex', gap: '1rem', backgroundColor: 'var(--bg-card)' }}>
+            <div className="glass-panel scroll-reveal scroll-reveal-up" style={{ padding: '2rem', display: 'flex', gap: '1rem', backgroundColor: 'var(--bg-card)' }}>
               <div style={{ width: '50px', height: '50px', borderRadius: '50%', backgroundColor: 'var(--color-secondary)', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold', fontSize: '1.2rem' }}>
                 B
               </div>
@@ -388,7 +411,7 @@ export default function LandingPage({ setRole, sampleMenu, setSelectedProduct })
               </div>
             </div>
 
-            <div className="glass-panel" style={{ padding: '2rem', display: 'flex', gap: '1rem', backgroundColor: 'var(--bg-card)' }}>
+            <div className="glass-panel scroll-reveal scroll-reveal-right" style={{ padding: '2rem', display: 'flex', gap: '1rem', backgroundColor: 'var(--bg-card)' }}>
               <div style={{ width: '50px', height: '50px', borderRadius: '50%', backgroundColor: 'var(--color-gold)', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold', fontSize: '1.2rem' }}>
                 S
               </div>
