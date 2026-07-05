@@ -40,13 +40,13 @@ export default function ManagerDashboard({
   };
 
   return (
-    <div className="animate-fade-in" style={{ display: 'grid', gridTemplateColumns: '1fr 380px', gap: '2rem' }}>
+    <div className="animate-fade-in dashboard-layout-grid" style={{ '--sidebar-width': '380px' }}>
       
       {/* Left Main Dashboard */}
       <div>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
+        <div className="dashboard-header-flex">
           <div>
-            <h2 style={{ fontSize: '2rem', fontWeight: 800 }}>Unit Manager Console</h2>
+            <h2 className="dashboard-title">Unit Manager Console</h2>
             <p style={{ color: 'var(--text-muted)' }}>Perform 1-spoon taste inspections, manage local home chefs, and resolve neighbor complaints.</p>
           </div>
           <span className="badge badge-warning" style={{ padding: '0.4rem 1rem' }}>
@@ -63,7 +63,7 @@ export default function ManagerDashboard({
             Inspect food batches at 9:30 AM before delivery starts. Grade 5 taste parameters (Spice, Salt, Masala, Oil, Texture) and rate the Overall Taste.
           </p>
 
-          <form onSubmit={handleTasteSubmit} className="grid-2">
+          <form onSubmit={handleTasteSubmit} className="manager-audit-form">
             <div>
               <div className="form-group">
                 <label className="form-label">Select Chef to Audit</label>
@@ -104,7 +104,7 @@ export default function ManagerDashboard({
               </div>
             </div>
 
-            <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', paddingLeft: '1rem' }}>
+            <div className="manager-audit-col-right">
               <div className="form-group">
                 <label className="form-label" style={{ fontWeight: 'bold' }}>⭐ Overall Taste Score (out of 10)</label>
                 <input 

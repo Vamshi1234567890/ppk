@@ -26,9 +26,9 @@ export default function AdminDashboard({ menu, activeOrders, ratingHistory }) {
     <div className="animate-fade-in">
       
       {/* Header */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
+      <div className="dashboard-header-flex">
         <div>
-          <h2 style={{ fontSize: '2rem', fontWeight: 800 }}>Admin Analytics Dashboard</h2>
+          <h2 className="dashboard-title">Admin Analytics Dashboard</h2>
           <p style={{ color: 'var(--text-muted)' }}>Corporate overview of unit performance, waste logs, and micro-unit economics.</p>
         </div>
         

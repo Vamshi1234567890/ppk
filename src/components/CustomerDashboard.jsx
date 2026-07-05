@@ -12,9 +12,10 @@ export default function CustomerDashboard({
   advanceOrderStatus,
   submitRating,
   activeCustomer,
-  setSelectedProduct
+  setSelectedProduct,
+  activeTab,
+  setActiveTab
 }) {
-  const [activeTab, setActiveTab] = useState('menu'); // 'menu', 'orders'
   const [ratingModalOrder, setRatingModalOrder] = useState(null);
   
   // Rating states (1-10)
@@ -25,6 +26,60 @@ export default function CustomerDashboard({
   const [overallTaste, setOverallTaste] = useState(8);
 
   const cartTotal = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+
+  const renderCart = () => (
+    <>
+      <h3 style={{ fontSize: '1.25rem', display: 'flex', alignItems: 'center', gap: '0.5rem', borderBottom: '1px solid var(--border-color)', paddingBottom: '0.75rem', marginBottom: '1rem', color: 'var(--text-bright)' }}>
+        <ShoppingCart size={18} /> Current Order
+      </h3>
+
+      {cart.length === 0 ? (
+        <div style={{ textAlign: 'center', padding: '3rem 1rem', color: 'var(--text-muted)' }}>
+          <p style={{ fontSize: '0.9rem' }}>Your shopping cart is empty.</p>
+        </div>
+      ) : (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+          <div style={{ maxHeight: '280px', overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '0.75rem', paddingRight: '0.25rem' }}>
+            {cart.map((item) => (
+              <div key={item.id} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'var(--bg-main)', padding: '0.5rem', borderRadius: '8px', border: '1px solid var(--border-color)' }}>
+                <div style={{ flexGrow: 1 }}>
+                  <h4 style={{ fontSize: '0.9rem', fontWeight: 600, color: 'var(--text-bright)' }}>{item.name}</h4>
+                  <p style={{ fontSize: '0.75rem', color: 'var(--color-secondary)', fontWeight: 600 }}>₹{item.price}</p>
+                </div>
+                
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                  <button 
+                    style={{ background: 'var(--color-primary-light)', border: 'none', color: 'var(--color-primary)', width: '22px', height: '22px', borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                    onClick={() => updateCartQty(item.id, -1)}
+                  >-</button>
+                  <span style={{ fontSize: '0.85rem', width: '15px', textAlign: 'center', color: 'var(--text-bright)', fontWeight: 600 }}>{item.quantity}</span>
+                  <button 
+                    style={{ background: 'var(--color-primary-light)', border: 'none', color: 'var(--color-primary)', width: '22px', height: '22px', borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                    onClick={() => updateCartQty(item.id, 1)}
+                  >+</button>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div style={{ borderTop: '1px solid var(--border-color)', paddingTop: '1rem', marginTop: '0.5rem' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1rem' }}>
+              <span style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>Subtotal:</span>
+              <strong style={{ fontSize: '1.2rem', color: 'var(--text-bright)' }}>₹{cartTotal}</strong>
+            </div>
+            
+            <button 
+              onClick={placeOrder}
+              className="btn btn-primary" 
+              style={{ width: '100%', borderRadius: 'var(--radius-md)' }}
+            >
+              Place Order (10 AM - 1 PM)
+            </button>
+          </div>
+        </div>
+      )}
+    </>
+  );
 
   const openRatingModal = (order) => {
     setRatingModalOrder(order);
@@ -61,12 +116,12 @@ export default function CustomerDashboard({
   };
 
   return (
-    <div className="animate-fade-in" style={{ display: 'grid', gridTemplateColumns: '1fr 340px', gap: '2rem' }}>
+    <div className="animate-fade-in dashboard-layout-grid" style={{ '--sidebar-width': '340px' }}>
       
       {/* Main Panel */}
       <div>
         {/* Customer Context Header */}
-        <div className="glass-panel" style={{ padding: '1rem 1.5rem', marginBottom: '2rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', backgroundColor: 'var(--color-primary-light)', border: '1px solid rgba(43, 81, 56, 0.15)', boxShadow: 'none' }}>
+        <div className="glass-panel profile-bar" style={{ padding: '1rem 1.5rem', marginBottom: '2rem', backgroundColor: 'var(--color-primary-light)', border: '1px solid rgba(43, 81, 56, 0.15)', boxShadow: 'none' }}>
           <div>
             <span style={{ fontSize: '0.75rem', fontWeight: 'bold', color: 'var(--color-primary)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Logged In Customer Profile</span>
             <h4 style={{ fontSize: '1.15rem', fontWeight: 800, color: 'var(--color-primary)' }}>{activeCustomer.name}</h4>
@@ -76,9 +131,9 @@ export default function CustomerDashboard({
           </div>
         </div>
 
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
+        <div className="dashboard-header-flex">
           <div>
-            <h2 style={{ fontSize: '2rem', fontWeight: 800 }}>Customer Kitchen Portal</h2>
+            <h2 className="dashboard-title">Customer Kitchen Portal</h2>
             <p style={{ color: 'var(--text-muted)' }}>Order hot curries cooked by verified home makers in your neighborhood unit.</p>
           </div>
           
@@ -113,6 +168,32 @@ export default function CustomerDashboard({
                   fontWeight: 'bold'
                 }}>
                   {activeOrders.length}
+                </span>
+              )}
+            </button>
+            <button 
+              className={`btn tab-btn-cart ${activeTab === 'cart' ? 'btn-primary' : ''}`}
+              style={{ borderRadius: '25px', padding: '0.5rem 1.25rem', fontSize: '0.85rem', position: 'relative', border: 'none' }}
+              onClick={() => setActiveTab('cart')}
+            >
+              Cart
+              {cart.length > 0 && (
+                <span style={{
+                  position: 'absolute',
+                  top: '-5px',
+                  right: '-5px',
+                  background: 'var(--color-secondary)',
+                  color: 'white',
+                  width: '18px',
+                  height: '18px',
+                  borderRadius: '50%',
+                  fontSize: '0.7rem',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontWeight: 'bold'
+                }}>
+                  {cart.reduce((sum, item) => sum + item.quantity, 0)}
                 </span>
               )}
             </button>
@@ -260,59 +341,17 @@ export default function CustomerDashboard({
             )}
           </div>
         )}
+
+        {activeTab === 'cart' && (
+          <div className="glass-panel mobile-only-cart" style={{ padding: '1.5rem', backgroundColor: 'var(--bg-card)', marginBottom: '2rem' }}>
+            {renderCart()}
+          </div>
+        )}
       </div>
 
       {/* Cart Sidebar */}
-      <div className="glass-panel" style={{ padding: '1.5rem', height: 'fit-content', position: 'sticky', top: '100px', backgroundColor: 'var(--bg-card)' }}>
-        <h3 style={{ fontSize: '1.25rem', display: 'flex', alignItems: 'center', gap: '0.5rem', borderBottom: '1px solid var(--border-color)', paddingBottom: '0.75rem', marginBottom: '1rem', color: 'var(--text-bright)' }}>
-          <ShoppingCart size={18} /> Current Order
-        </h3>
-
-        {cart.length === 0 ? (
-          <div style={{ textAlign: 'center', padding: '3rem 1rem', color: 'var(--text-muted)' }}>
-            <p style={{ fontSize: '0.9rem' }}>Your shopping cart is empty.</p>
-          </div>
-        ) : (
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-            <div style={{ maxHeight: '280px', overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '0.75rem', paddingRight: '0.25rem' }}>
-              {cart.map((item) => (
-                <div key={item.id} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'var(--bg-main)', padding: '0.5rem', borderRadius: '8px', border: '1px solid var(--border-color)' }}>
-                  <div style={{ flexGrow: 1 }}>
-                    <h4 style={{ fontSize: '0.9rem', fontWeight: 600, color: 'var(--text-bright)' }}>{item.name}</h4>
-                    <p style={{ fontSize: '0.75rem', color: 'var(--color-secondary)', fontWeight: 600 }}>₹{item.price}</p>
-                  </div>
-                  
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                    <button 
-                      style={{ background: 'var(--color-primary-light)', border: 'none', color: 'var(--color-primary)', width: '22px', height: '22px', borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
-                      onClick={() => updateCartQty(item.id, -1)}
-                    >-</button>
-                    <span style={{ fontSize: '0.85rem', width: '15px', textAlign: 'center', color: 'var(--text-bright)', fontWeight: 600 }}>{item.quantity}</span>
-                    <button 
-                      style={{ background: 'var(--color-primary-light)', border: 'none', color: 'var(--color-primary)', width: '22px', height: '22px', borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
-                      onClick={() => updateCartQty(item.id, 1)}
-                    >+</button>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            <div style={{ borderTop: '1px solid var(--border-color)', paddingTop: '1rem', marginTop: '0.5rem' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1rem' }}>
-                <span style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>Subtotal:</span>
-                <strong style={{ fontSize: '1.2rem', color: 'var(--text-bright)' }}>₹{cartTotal}</strong>
-              </div>
-              
-              <button 
-                onClick={placeOrder}
-                className="btn btn-primary" 
-                style={{ width: '100%', borderRadius: 'var(--radius-md)' }}
-              >
-                Place Order (10 AM - 1 PM)
-              </button>
-            </div>
-          </div>
-        )}
+      <div className="glass-panel desktop-only-sidebar" style={{ padding: '1.5rem', height: 'fit-content', position: 'sticky', top: '100px', backgroundColor: 'var(--bg-card)' }}>
+        {renderCart()}
       </div>
 
       {/* Interactive Quality Rating Modal */}

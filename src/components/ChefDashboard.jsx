@@ -52,13 +52,13 @@ export default function ChefDashboard({
   );
 
   return (
-    <div className="animate-fade-in" style={{ display: 'grid', gridTemplateColumns: '1fr 360px', gap: '2rem' }}>
+    <div className="animate-fade-in dashboard-layout-grid" style={{ '--sidebar-width': '360px' }}>
       
       {/* Left Main Console */}
       <div>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
+        <div className="dashboard-header-flex">
           <div>
-            <h2 style={{ fontSize: '2rem', fontWeight: 800 }}>Chef Operations Center</h2>
+            <h2 className="dashboard-title">Chef Operations Center</h2>
             <p style={{ color: 'var(--text-muted)' }}>Manage your daily cooking menu, handle active orders, and run hygiene scans.</p>
           </div>
           <span className="badge badge-success" style={{ padding: '0.4rem 1rem' }}>
@@ -216,18 +216,15 @@ export default function ChefDashboard({
           ) : (
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
               {chefOrders.map((order) => (
-                <div key={order.id} style={{
+                <div key={order.id} className="chef-order-row" style={{
                   padding: '1rem 1.25rem',
                   background: 'var(--bg-main)',
                   border: '1px solid var(--border-color)',
-                  borderRadius: '8px',
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'center'
+                  borderRadius: '8px'
                 }}>
                   <div>
                     <strong style={{ fontSize: '0.95rem', color: 'var(--text-bright)' }}>Order #{order.id}</strong>
-                    <div style={{ display: 'flex', gap: '0.75rem', marginTop: '0.25rem', fontSize: '0.8rem', color: 'var(--text-muted)' }}>
+                    <div style={{ display: 'flex', gap: '0.75rem', marginTop: '0.25rem', fontSize: '0.8rem', color: 'var(--text-muted)', flexWrap: 'wrap' }}>
                       <span>Items: {order.items.map(i => `${i.name} (${i.quantity}x)`).join(', ')}</span>
                       <span>•</span>
                       <span>Total: ₹{order.total}</span>

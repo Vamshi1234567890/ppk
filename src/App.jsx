@@ -4,7 +4,7 @@ import CustomerDashboard from './components/CustomerDashboard.jsx';
 import ChefDashboard from './components/ChefDashboard.jsx';
 import ManagerDashboard from './components/ManagerDashboard.jsx';
 import AdminDashboard from './components/AdminDashboard.jsx';
-import { ChefHat, Shield, User, HelpCircle, UtensilsCrossed, Settings, Plus, Info, X, Users } from 'lucide-react';
+import { ChefHat, Shield, User, HelpCircle, UtensilsCrossed, Settings, Plus, Info, X, Users, Menu, ShoppingCart } from 'lucide-react';
 import './App.css';
 
 // Initial Menu list based on PPK PDF Product Matrix & Curries Menu
@@ -229,6 +229,13 @@ function App() {
   // Dynamic switch simulator sidebar toggle
   const [showSimulatorBar, setShowSimulatorBar] = useState(true);
   
+  const [customerTab, setCustomerTab] = useState('menu');
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [role, customerTab]);
+  
   // Registration Inputs
   const [newCustName, setNewCustName] = useState('');
   const [newCustAddr, setNewCustAddr] = useState('');
@@ -423,7 +430,10 @@ function App() {
             <button 
               className={`nav-link btn-secondary btn ${role === 'customer' ? 'active' : ''}`}
               style={{ padding: '0.4rem 1rem', fontSize: '0.85rem' }}
-              onClick={() => setRole('customer')}
+              onClick={() => {
+                setCustomerTab('menu');
+                setRole('customer');
+              }}
             >
               <User size={14} /> Customer Portal
             </button>
@@ -435,6 +445,14 @@ function App() {
               <ChefHat size={14} /> Chef Portal
             </button>
           </div>
+
+          <button 
+            className="menu-toggle-btn" 
+            onClick={() => setIsDrawerOpen(true)}
+            title="Open Navigation Menu"
+          >
+            <Menu size={20} />
+          </button>
         </div>
       </nav>
 
@@ -460,6 +478,8 @@ function App() {
             submitRating={submitRating}
             activeCustomer={activeCustomer}
             setSelectedProduct={setSelectedProduct}
+            activeTab={customerTab}
+            setActiveTab={setCustomerTab}
           />
         )}
         {role === 'chef' && (
@@ -489,16 +509,7 @@ function App() {
       </main>
 
       {/* Floatable Simulation Control Panel (Enables testing of all portals in prototype mode) */}
-      <div style={{
-        position: 'fixed',
-        bottom: '15px',
-        right: '15px',
-        zIndex: 500,
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'flex-end',
-        gap: '0.5rem'
-      }}>
+      <div className="simulator-panel">
         {showSimulatorBar ? (
           <div className="glass-panel animate-fade-in-up" style={{
             width: '320px',
@@ -739,6 +750,103 @@ function App() {
           </p>
         </div>
       </footer>
+
+      {/* Bottom Navigation for Mobile */}
+      <div className="bottom-nav">
+        <button 
+          className={`bottom-nav-link ${role === 'landing' ? 'active' : ''}`}
+          onClick={() => setRole('landing')}
+        >
+          <UtensilsCrossed size={18} />
+          <span>Home</span>
+        </button>
+        <button 
+          className={`bottom-nav-link ${role === 'customer' ? 'active' : ''}`}
+          onClick={() => {
+            setCustomerTab('menu');
+            setRole('customer');
+          }}
+        >
+          <User size={18} />
+          <span>Customer</span>
+        </button>
+        <button 
+          className={`bottom-nav-link ${role === 'chef' ? 'active' : ''}`}
+          onClick={() => setRole('chef')}
+        >
+          <ChefHat size={18} />
+          <span>Chef</span>
+        </button>
+      </div>
+
+      {/* Slide-out Navigation Drawer */}
+      <div className={`nav-drawer-overlay ${isDrawerOpen ? 'open' : ''}`} onClick={() => setIsDrawerOpen(false)}></div>
+      <div className={`nav-drawer ${isDrawerOpen ? 'open' : ''}`}>
+        <div className="drawer-header">
+          <span style={{ fontWeight: 'bold', fontSize: '1.1rem', color: 'var(--color-primary)' }}>PPK Navigation</span>
+          <button className="drawer-close-btn" onClick={() => setIsDrawerOpen(false)} title="Close Menu">
+            <X size={24} />
+          </button>
+        </div>
+        <div className="drawer-links">
+          <button 
+            className={`drawer-link ${role === 'landing' ? 'active' : ''}`}
+            onClick={() => {
+              setRole('landing');
+              setIsDrawerOpen(false);
+            }}
+          >
+            <UtensilsCrossed size={18} /> Home
+          </button>
+          <button 
+            className={`drawer-link ${role === 'customer' && customerTab === 'menu' ? 'active' : ''}`}
+            onClick={() => {
+              setCustomerTab('menu');
+              setRole('customer');
+              setIsDrawerOpen(false);
+            }}
+          >
+            <ShoppingCart size={18} /> Products
+          </button>
+          <button 
+            className={`drawer-link ${role === 'customer' && customerTab === 'orders' ? 'active' : ''}`}
+            onClick={() => {
+              setCustomerTab('orders');
+              setRole('customer');
+              setIsDrawerOpen(false);
+            }}
+          >
+            <User size={18} /> Customer Portal
+          </button>
+          <button 
+            className={`drawer-link ${role === 'chef' ? 'active' : ''}`}
+            onClick={() => {
+              setRole('chef');
+              setIsDrawerOpen(false);
+            }}
+          >
+            <ChefHat size={18} /> Chef Portal
+          </button>
+          <button 
+            className={`drawer-link ${role === 'manager' ? 'active' : ''}`}
+            onClick={() => {
+              setRole('manager');
+              setIsDrawerOpen(false);
+            }}
+          >
+            <Shield size={18} /> Manager Portal
+          </button>
+          <button 
+            className={`drawer-link ${role === 'admin' ? 'active' : ''}`}
+            onClick={() => {
+              setRole('admin');
+              setIsDrawerOpen(false);
+            }}
+          >
+            <Shield size={18} /> Admin Portal
+          </button>
+        </div>
+      </div>
     </div>
   );
 }

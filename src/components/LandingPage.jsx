@@ -56,22 +56,14 @@ export default function LandingPage({ setRole, sampleMenu, setSelectedProduct })
               <span className="badge badge-primary" style={{ marginBottom: '1rem', padding: '0.4rem 1rem' }}>
                 ⭐ Neighborhood Kitchen Revolution
               </span>
-              <h1 style={{ fontSize: '3.5rem', lineHeight: '1.15', marginBottom: '1.5rem', fontWeight: 800 }}>
+              <h1 className="hero-title">
                 Pakkinti <span style={{ color: 'var(--color-primary)' }}>Pulla Kura</span>
               </h1>
               <p style={{ fontSize: '1.15rem', color: 'var(--text-muted)', marginBottom: '2rem', maxWidth: '540px' }}>
                 Taste the culinary magic of your neighborhood! Connecting 1,000 households with 20 verified home makers cooking fresh, healthy, and authentic curries daily from 10 AM to 1 PM.
               </p>
               
-              <form onSubmit={handleSearch} className="glass-panel" style={{
-                display: 'flex',
-                gap: '0.5rem',
-                padding: '0.5rem',
-                borderRadius: '50px',
-                maxWidth: '480px',
-                border: '1px solid var(--color-primary)',
-                boxShadow: 'var(--shadow-sm)'
-              }}>
+              <form onSubmit={handleSearch} className="hero-search-form">
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flex: 1, paddingLeft: '1rem' }}>
                   <MapPin size={18} style={{ color: 'var(--color-primary)' }} />
                   <input 
@@ -170,7 +162,7 @@ export default function LandingPage({ setRole, sampleMenu, setSelectedProduct })
                 <span style={{ display: 'inline-block', width: '20px', height: '1px', backgroundColor: 'var(--border-color)' }}></span>
                 <span style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>About Us (Our Story)</span>
               </div>
-              <h2 style={{ fontSize: '2.5rem', lineHeight: '1.25', marginBottom: '1.5rem', fontWeight: 800 }}>
+              <h2 className="section-title">
                 We solved food delivery. <br />
                 <span style={{ color: 'var(--color-secondary)', fontStyle: 'italic' }}>We never solved food trust.</span>
               </h2>
@@ -222,7 +214,7 @@ export default function LandingPage({ setRole, sampleMenu, setSelectedProduct })
               <span style={{ display: 'inline-block', width: '20px', height: '1px', backgroundColor: 'var(--border-color)' }}></span>
               <span style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>The PPK Blueprint</span>
             </div>
-            <h2 style={{ fontSize: '2.5rem', marginBottom: '1rem', fontWeight: 800 }}>The PPK Blueprint</h2>
+            <h2 className="section-title" style={{ marginBottom: '1rem' }}>The PPK Blueprint</h2>
             <p style={{ color: 'var(--text-muted)', maxWidth: '600px', margin: '0 auto' }}>
               We build micro-local community hubs standardizing home cooking. Here is how each 1000-house block operates:
             </p>
@@ -295,14 +287,14 @@ export default function LandingPage({ setRole, sampleMenu, setSelectedProduct })
       {/* Featured Menu Preview */}
       <section className="menu-preview" style={{ padding: '3rem 0 5rem' }}>
         <div className="container">
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '3rem' }}>
+          <div className="dashboard-header-flex" style={{ alignItems: 'flex-end', marginBottom: '3rem' }}>
             <div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1rem' }}>
                 <span style={{ fontSize: '0.9rem', fontWeight: 700, color: 'var(--color-secondary)', letterSpacing: '0.1em' }}>04</span>
                 <span style={{ display: 'inline-block', width: '20px', height: '1px', backgroundColor: 'var(--border-color)' }}></span>
                 <span style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Today's Curries</span>
               </div>
-              <h2 style={{ fontSize: '2.2rem', fontWeight: 800 }}>Explore Today's Curries</h2>
+              <h2 className="section-title" style={{ marginBottom: '0.5rem' }}>Explore Today's Curries</h2>
               <p style={{ color: 'var(--text-muted)' }}>Click any card to read recipe standards, nutrition cost-breakdowns, and health matrixes.</p>
             </div>
             <button className="btn btn-primary" onClick={() => setRole('customer')}>
@@ -378,7 +370,7 @@ export default function LandingPage({ setRole, sampleMenu, setSelectedProduct })
               <span style={{ display: 'inline-block', width: '20px', height: '1px', backgroundColor: 'var(--border-color)' }}></span>
               <span style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Our Neighborhood Chefs</span>
             </div>
-            <h2 style={{ fontSize: '2.5rem', fontWeight: 800 }}>Our Verified Neighborhood Chefs</h2>
+            <h2 className="section-title">Our Verified Neighborhood Chefs</h2>
             <p style={{ color: 'var(--text-muted)', maxWidth: '600px', margin: '0 auto' }}>
               We handpick home makers and verify their kitchens daily. Meet some of the talented cooks serving your neighborhood block:
             </p>
